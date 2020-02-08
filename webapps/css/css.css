@@ -1,0 +1,75 @@
+.body{
+    background-color: #444;	
+    padding: 3px;	
+} 
+
+
+#nav{
+    background-color: #44F;	
+    padding: 3px;	
+} 
+
+
+#nav ul{
+    padding: 0px; 	
+    margin: 0px;
+} 
+
+
+#nav ul li {
+    display: inline; 	
+    margin-right: 1em;
+} 
+
+
+#nav ul li a { 
+    font-family: "Trebuchet MS", sans-serif; 
+    text-decoration: none;
+    color: #fff; 	 
+} 
+
+
+#nav ul li a:hover{ 
+    border-bottom: dotted 1px #fff;	 
+}
+
+
+p {
+  display:       block;
+  margin-top:    0.5em;
+  margin-bottom: 0.5em;
+}
+
+form {
+  
+  margin-top:    2em;
+  margin-left:    2em;
+}
+
+input, textarea, select {
+
+  background-color: #ffffee;
+  border-width: 1px;
+  border-color: #000000;
+  border-style: solid;
+}
+
+.input {
+
+  background-color: #eeeeff;
+  border-width: 2px;
+  border-color: #0000ff;
+}
+
+.ButtonStyle {
+
+  color: #ffffff;
+  padding: 5px;
+  background-color: #4444ff;
+}
+
+section ul li {
+  margin:    1.0em;
+}
+
+

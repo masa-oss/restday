@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="minimal-json.jar" default="jar" basedir="..">
+
+  <property name="SRC_DIR"     value="./src2"              />
+  <property name="DEST_DIR"    value="./ant.min/classes"   />
+  <property name="JAR_DIR"     value="./webapps/WEB-INF/lib"  />
+  <property name="JAR_NAME"    value="minimal-json.jar"    />
+
+  <path id='my-classpath'>
+    <pathelement path="./" />
+  </path>
+
+
+  <target name="prepare">
+    <tstamp />
+    <mkdir dir="${DEST_DIR}" />
+  </target>
+
+  <target name="compile" depends="prepare">
+    <echo message="compiling   ${SRC_DIR} ... " />
+    <javac srcdir="${SRC_DIR}" destdir="${DEST_DIR}"
+       encoding="UTF-8" debug="on" includeantruntime="false">
+      <classpath refid="my-classpath" />
+      <include name="**/*.java" />
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile">
+    <echo message="jar !!" />
+    <jar basedir="${DEST_DIR}" destfile="${JAR_DIR}/${JAR_NAME}" >
+    </jar>
+  </target>
+
+
+  <target name="clean">
+
+    <delete dir="${DEST_DIR}" />
+    <delete file="${JAR_DIR}/${JAR_NAME}" />
+    
+  </target>
+
+</project>

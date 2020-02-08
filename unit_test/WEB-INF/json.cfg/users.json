@@ -1,0 +1,12 @@
+{
+  "name" : "users",
+  "GET" : {
+    "validate" : [
+            ],
+    "where" : [ 
+          { "from" : [  "Date" ] },
+          { "to" :   [  "Date" ] }
+            ],
+    "sql" : "select * from user_t {w ?from <= first_visit  && first_visit <= ?to}"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name" : "Hoge01",
+  "GET" : {
+    "customization" : "example.Customize01",
+    "validate" : [ 
+          { "pkey1" : [  "int" ] }
+            ],
+    "sql" : "select * from master1 where  master1_sqno = ?pkey1"
+  },
+  "POST" : {
+    "customization" : "example.Customize01",
+    "validate" : [ 
+          { "bb" : [  "string"  ] },
+          { "aa" : [  "int", "min" , 0, "max" , 100000 ] },
+          { "remote_addr" : [  "string"  ] },
+          { "current_time" : [  "Timestamp", "yyyy-MM-dd HH:mm:ss.S" ] }
+            ],
+    "sql" : "insert into master1(aa, bb, createdTime, createdIp) values (?aa, ?bb, ?current_time, ?remote_addr) "
+  },
+  "PUT" : {
+    "customization" : "example.Customize01",
+    "validate" : [ 
+          { "pkey1" : [  "int" ] },
+          { "bb" : [  "string"  ] },
+          { "aa" : [  "int", "min" , 0, "max" , 100000 ] },
+          { "remote_addr" : [  "string"  ] },
+          { "current_time" : [  "Timestamp", "yyyy-MM-dd HH:mm:ss.S" ] }
+            ],
+    "sql" : "update master1 set aa = ?aa, bb = ?bb, updatedTime = ?current_time, updatedIp = ?remote_addr  where master1_sqno = ?pkey1 "
+  },
+  "DELETE" : {
+    "customization" : "example.Customize01",
+    "validate" : [ 
+          { "pkey1" : [  "int" ] }
+            ],
+    "sql" : "delete from master1 where  master1_sqno = ?pkey1"
+  }
+}

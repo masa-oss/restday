@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="RESTDAY" default="compile" basedir="..">
+
+  <property name="SRC_DIR"           value="./src"               />
+  <property name="SRC3_DIR"           value="./src3"               />
+  <property name="SRC4_DIR"           value="./src4"               />
+  <property name="DEST_DIR"    value="./webapps/WEB-INF/classes"    />
+
+
+  <path id='my-classpath'>
+    <pathelement location="./lib/servlet-api.jar"         />
+    <!-- log4j ver2   -->
+    <pathelement location="./webapps/WEB-INF/lib/log4j-api-2.11.1.jar" />
+    <pathelement location="./webapps/WEB-INF/lib/log4j-core-2.11.1.jar" />
+    <pathelement location="./webapps/WEB-INF/lib/minimal-json.jar" />
+    <pathelement path="./" />
+  </path>
+
+
+  <target name="prepare">
+    <tstamp />
+    <mkdir dir="${DEST_DIR}" />
+  </target>
+
+  <target name="compile" depends="prepare">
+
+    <echo message="compiling   ${SRC_DIR} ... " />
+    <javac srcdir="${SRC_DIR}" destdir="${DEST_DIR}"
+           encoding="UTF-8" debug="on" includeantruntime="false">
+      <classpath refid="my-classpath" />
+      <include name="**/*.java" />
+      <compilerarg value="-Xlint:unchecked" />	
+    </javac>
+
+    <echo message="compiling   ${SRC3_DIR} ... " />
+    <javac srcdir="${SRC3_DIR}" destdir="${DEST_DIR}"
+           encoding="UTF-8" debug="on" includeantruntime="false">
+      <classpath refid="my-classpath" />
+      <include name="**/*.java" />
+      <compilerarg value="-Xlint:unchecked" />	
+    </javac>
+
+  </target>
+
+  <target name="clean">
+
+    <delete dir="./webapps/WEB-INF/classes/jp" />
+    <delete dir="./webapps/WEB-INF/classes/com" />
+    
+    
+    <delete dir="./webapps/WEB-INF/classes/sample" />
+
+    
+    <delete dir="./work/org" />
+    <delete file="./work/SESSIONS.ser" />
+  </target>
+
+</project>

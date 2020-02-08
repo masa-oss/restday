@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache">
+<title>REST API test</title>
+<link href="css/ress.min.css" rel="stylesheet" type="text/css">
+<link href="css/css.css" rel="stylesheet" type="text/css">
+
+<style>
+section {margin:2em;padding:0;border:0}
+li {margin:2em;padding:0;border:0}
+
+fieldset{margin:2em;padding:0;border:0}
+
+fieldset div {padding-top:10px;clear:both}
+fieldset div label {display:block; clear:left; text-align:right; width:20em; float:left; padding-right:10px; line-height:27px; font-weight:bold; font-size:1em}
+fieldset div input {width:5em; float:left; background-color: #fff3b8;  }
+
+</style>
+
+<!--  https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch    -->
+
+<!--  https://sbfl.net/blog/2017/01/29/fetch-api/    -->
+
+<!-- How to use fetch  -->
+
+
+<script type="text/javascript">
+
+var appc = "/restday/v1";
+
+function OnGet1Click() {
+  
+  fetch(appc + '/master1/11', {
+    headers: {
+        'Accept': 'application/json'
+    }
+  }
+  ).then((response) => {
+    console.log("status=" + response.status);
+    return response.text();
+  })
+  .then((text) => console.log(text))
+  .catch((error) => console.log(error));
+}
+
+
+function OnGet3Click() {
+  
+  fetch(appc + '/master1/11?name=smith&email=s', {
+    headers: {
+        'Accept': 'application/json'
+    }
+  }
+  ).then((response) => {
+    console.log("status=" + response.status);
+    return response.text();
+  })
+  .then((text) => console.log(text))
+  .catch((error) => console.log(error));
+}
+
+
+
+function OnGet2Click() {
+
+  var input_sqno = document.getElementById("wl01").value;
+  
+  if (input_sqno == "") {
+    alert("Please enter a number");
+    return;
+  }
+  console.log("" + input_sqno );
+  
+  fetch(appc + '/master1/'+input_sqno
+  ).then((response) => {
+    console.log("status=" + response.status);
+    return response.text();
+  })
+  .then((text) => console.log(text))
+  .catch((error) => console.log(error));
+}
+
+function OnPost1Click() {
+
+//  var data = {'company': 11, 'sqno': 56, 'aa': 35, 'bb': 'aiueo', 'tt': '2019-12-30'  };
+  var data = { 'aa': 35, 'bb': 'aiueo' };
+  fetch(appc + '/master1', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then((response) => {
+    console.log("status=" + response.status);
+    return response.text();
+  })
+  .then((text) => console.log(text))
+  .catch((error) => console.log(error));
+}
+
+
+function OnPost2Click() {
+
+
+  var aa = document.getElementById("p0101").value;
+  var bb = document.getElementById("p0102").value;
+  
+  if (aa == "" || bb == "") {
+    alert("Please enter a number");
+    return;
+  }
+  console.log("aa = " + aa + ", bb = " + bb );
+
+  var data = { 'aa': aa, 'bb': bb };
+
+  fetch(appc + '/master1', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then((response) => {
+    console.log("status=" + response.status);
+    return response.text();
+  })
+  .then((text) => console.log(text))
+  .catch((error) => console.log(error));
+}
+
+
+function OnPut2Click() {
+  
+  var data = { 'aa': 35, 'bb': 'abcd', 'tt': '2019-12-30'  };
+  fetch(appc + '/master1/11', {
+    method: 'PUT',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then((response) => {
+    console.log("status=" + response.status);
+    return response.text();
+  })
+  .then((text) => console.log(text))
+  .catch((error) => console.log(error));
+  
+}
+
+
+
+function OnDeleteClick() {
+
+  var input_sqno = document.getElementById("r0104").value;
+  
+  if (input_sqno == "") {
+    alert("Please enter a number");
+    return;
+  }
+  console.log("" + input_sqno );
+  
+  fetch(appc + '/master1/' + input_sqno , {
+    method: 'DELETE',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+  }).then((response) => {
+    console.log("status=" + response.status);
+    return response.text();
+  })
+  .then((text) => console.log(text))
+  .catch((error) => console.log(error));
+    
+}
+</script>
+
+
+</head>
+
+<body>
+<header>
+    <h1>fetch01.html (master1) </h1>
+</header>
+
+<nav id="nav">
+  <ul>
+    <li style="color:white"><a href="index.html">INDEX</a></li>
+  </ul>
+</nav>
+
+<br/>
+<button value="POST"  class="ButtonStyle"  onclick="OnPost1Click();" >POST(Insert) 35, abcd </button>
+<br/>
+<div> </div>
+<br/>
+
+
+<fieldset>
+  <div><label for="p0101">aa</label>
+      <input id="p0101" type="text" name="p0101" value=""  tabindex="1">
+  </div>
+  <div><label for="p0102">bb</label>
+      <input id="p0102" type="text" name="p0102" value=""  tabindex="1">
+  </div>
+  <button value="POST"  class="ButtonStyle"  onclick="OnPost2Click();" >POST(Insert) </button>
+</fieldset>
+
+
+
+<button value="PUT"  class="ButtonStyle"  onclick="OnPut2Click();" >PUT(Update) 11</button>
+<br/>
+<div> </div>
+<br/>
+
+
+<button   class="ButtonStyle"  onclick="OnGet1Click();" >GET(Select) key =11</button>
+<br/>
+<div> </div>
+<br/>
+
+
+<fieldset>
+  <div><label for="wl01">sequence number</label>
+      <input id="wl01" type="text" name="wl01" value=""  tabindex="1">
+  </div>
+  <button value="GET"  class="ButtonStyle"  onclick="OnGet2Click();" >GET(Select)</button>
+</fieldset>
+
+
+<br/>
+<div> </div>
+<br/>
+
+<button   class="ButtonStyle"  onclick="OnGet3Click();" >GET(Select) with parameter</button>
+<br/>
+<div> </div>
+<br/>
+
+
+
+
+<fieldset>
+  <div><label for="r0104">sequence number</label>
+      <input id="r0104" type="text" name="r0104" value="" >
+  </div>
+
+  <button value="DELETE"  class="ButtonStyle"  onclick="OnDeleteClick();" >DELETE</button>
+</fieldset>
+
+
+
+
+
+</body>
+</html>

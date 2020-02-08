@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache">
+<title>REST API test</title>
+<link href="css/ress.min.css" rel="stylesheet" type="text/css">
+<link href="css/css.css" rel="stylesheet" type="text/css">
+
+<style>
+section {margin:2em;padding:0;border:0}
+li {margin:2em;padding:0;border:0}
+
+</style>
+
+<!--  https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch    -->
+
+<!--  https://sbfl.net/blog/2017/01/29/fetch-api/    -->
+
+
+<script type="text/javascript">
+
+var appc = "/restday/v1";
+
+function OnPost2Click() {
+
+  fetch(appc + '/twokey', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: '{{123, 456'      // syntax error!
+  }).then((response) => {
+     console.log("status=" + response.status);
+     return response.text();
+  })
+  .then((text) => console.log(text))
+  .catch((error) => console.log(error));
+}
+
+</script>
+
+
+</head>
+
+<body>
+<header>
+    <h1>fetch90.html (json syntax error)</h1>
+</header>
+
+<nav id="nav">
+  <ul>
+    <li style="color:white"><a href="index.html">INDEX</a></li>
+  </ul>
+</nav>
+
+<br/>
+<button value="POST"  class="ButtonStyle"  onclick="OnPost2Click();" >POST (JSON Error)</button>
+<br/>
+<div> </div>
+<br/>
+
+
+<form method="get" action="/restday/v1/twokey">
+<input type="text" name="aa"></input>
+
+<input type="submit" value=" OK " ></input>
+
+<form>
+
+</body>
+</html>

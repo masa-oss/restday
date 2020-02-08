@@ -1,0 +1,69 @@
+create database rest_db;
+
+
+use rest_db;
+
+create table master1 (
+  `master1_sqno` int(11) NOT NULL AUTO_INCREMENT ,
+    aa   integer default null,
+    bb  varchar(50) default null,    
+    tt   date default null,
+    createdIp   varchar(50) default null,
+    createdTime   timestamp null default null,
+    updatedIp   varchar(50) default null,
+    updatedTime   timestamp null default null,
+  primary key(master1_sqno)
+);
+
+
+
+create table  detail1 (
+    detail1_sqno    serial,
+    master1_sqno bigint default null,
+    nn   integer default null,
+    oo  varchar(50) default null,    
+  primary key(detail1_sqno)
+);
+
+
+
+use rest_db;
+
+create table twokey (
+    twokey_comp  int,
+    twokey_sqno  int,
+    aa   integer default null,
+    bb  varchar(50) default null,    
+    tt   date default null,
+    createdIp   varchar(50) default null,
+    createdTime   timestamp null default null,
+    updatedIp   varchar(50) default null,
+    updatedTime   timestamp null default null,
+   primary key( twokey_comp, twokey_sqno )
+);
+
+use rest_db;
+
+create table user_t (
+    user_sqno       serial,
+    name            varchar(30) default null,    
+    email_address   varchar(60) default null,
+    phone_number    varchar(20) default null,
+    first_visit   date default null,
+    recent_visits   date default null,
+  primary key(user_sqno)
+);
+
+use rest_db;
+
+insert into user_t values(1, 'SMITH', 'smith@foo.bar.com', '03-1234-5678', '2019-01-01', '2020-01-01'   );
+
+insert into user_t values(2, 'ALLEN', 'allen@foo.bar.com', '03-2345-6789', '2019-04-01', '2020-04-01'  );
+
+insert into user_t values(3, 'JONES', 'jones@foo.bar.com', '03-3456-7890', '2019-08-01', '2020-08-01'  );
+
+
+CREATE USER restrest IDENTIFIED BY 'bnnu7w95r9bg';
+
+GRANT ALL ON rest_db.* TO restrest;
+

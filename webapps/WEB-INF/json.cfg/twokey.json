@@ -1,0 +1,44 @@
+{
+  "name" : "Hoge02",
+  "GET" : {
+    "customization" : "example.Customize01",
+    "validate" : [ 
+          { "pkey1" : [  "int", "min" , 1, "max" , 1000 ] },
+          { "pkey2" : [  "int", "min" , 1, "max" , 1000 ] }
+            ],
+    "sql" : "select * from twokey where  twokey_comp = ?pkey1 and twokey_sqno = ?pkey2 "
+  },
+  "POST" : {
+    "customization" : "example.Customize01",
+    "validate" : [ 
+          { "company" : [  "int"   ] },
+          { "aa" : [  "int"   ] },
+          { "bb" : [  "string"   ] },
+          { "tt" : [  "string"   ] },
+          { "sqno" : [  "int", "min" , 1, "max" , 10 ] },
+          { "remote_addr" : [  "string"  ] },
+          { "current_time" : [  "Timestamp", "yyyy-MM-dd HH:mm:ss.S" ] }
+            ],
+    "sql" : "insert into twokey(twokey_comp, twokey_sqno, aa, bb, createdTime, createdIp) values (?company, ?sqno, ?aa, ?bb, ?current_time, ?remote_addr) "
+  },
+  "PUT" : {
+    "customization" : "example.Customize01",
+    "validate" : [ 
+          { "pkey1" : [  "int", "min" , 1, "max" , 10 ] },
+          { "pkey2" : [  "int", "min" , 1, "max" , 10 ] },
+          { "bb"    : [  "string"   ] },
+          { "aa"    : [  "int", "min" , 1, "max" , 10 ] },
+          { "remote_addr"    : [  "string"   ] },
+          { "current_time"    : [  "Timestamp", "yyyy-MM-dd HH:mm:ss.S"    ] }
+            ],
+    "sql" : "update twokey set aa = ?aa, bb = ?bb,updatedTime = ?current_time, updatedIp = ?remote_addr where twokey_comp = ?pkey1 and twokey_sqno = ?pkey2 "
+  },
+  "DELETE" : {
+    "customization" : "example.Customize01",
+    "validate" : [ 
+          { "pkey1" : [  "int", "min" , 1, "max" , 10 ] },
+          { "pkey2" : [  "int", "min" , 1, "max" , 10 ] }
+            ],
+    "sql" : "delete from twokey where twokey_comp = ?pkey1 and twokey_sqno = ?pkey2"
+  }
+}
