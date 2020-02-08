@@ -23,6 +23,9 @@ Restday is a library for easily creating REST-SERVER to be installed in servlet 
 -   省資源です
 -   Small footprint.   
 
+-   今のところMySQLのみで動きます
+-   Currently only works with MySQL
+
 ## Demo
 
 -   Here is an example configuration file
@@ -126,11 +129,19 @@ This library executes the above SQL with pkey1 = 123 and returns the result in J
 
 
 ## Install
-   
+  
+  Look at HwoToRunOnYourPC.md
   
 ## Contribution
 
-  
+- 他のデータベースでも動くようにしたいです ( postgres )
+- I want to work with other databases ( postgres )
+
+- これに適した良い ORマッパー ライブラリがあれば、教えてください。それに変更したいです。
+- If there is a good OR mapper library suitable for this, please let me know. I want to change it.
+
+- MySQLのConnectionをクローズする時にExceptionが出るのを直したいです。誰か教えてください。
+- I want to fix an Exception when closing MySQL Connection. Please tell someone.
 
 ## Licence
 
