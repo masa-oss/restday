@@ -108,10 +108,15 @@ This library executes the above SQL with pkey1 = 123 and returns the result in J
 
 ## About minimal-json.jar   https://github.com/ralfstx/minimal-json/
 
-   私は、Java11を使っているが、もし別のjava (ex. java8)を使っているなら
+-   私は、Java11を使っているが、もし別のjava (ex. java8)を使っているなら
    再コンパイルした方が良いでしょう。
    
-   minimal-json の jarが見当たらなかったので、自分でコンパイルしています。
+-   I am using Java11 but if you are using another java (ex.java8)
+   You may want to recompile.   
+   
+-   minimal-json の jarが見当たらなかったので、自分でコンパイルしています。
+-   I did not find the minimal-json jar, so I compile it myself.
+
 
 ```Batchfile
     cd ant.min
