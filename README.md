@@ -49,6 +49,8 @@ Restday is a library for easily creating REST-SERVER to be installed in servlet 
 
 This library executes the above SQL with pkey1 = 123 and returns the result in JSON
 
+---
+
 - No2
 
 ```JSON
@@ -76,9 +78,108 @@ This library executes the above SQL with pkey1 = 123 and returns the result in J
 
 このライブラリは、aa=123, bb="xyz", current_time=現在時刻, remote_addr=クライアントのIPアドレス、とし、上記SQLを実行します
 
+---
+
+## 複合主キーも利用可能です
+## Composite primary key is also available
+
+- No3
 
 
+```SQL
+create table twokey (
+    twokey_comp  int,
+    twokey_sqno  int,
+    aa   integer default null,
+    bb  varchar(50) default null,    
+    tt   date default null,
+    createdIp   varchar(50) default null,
+    createdTime   timestamp null default null,
+    updatedIp   varchar(50) default null,
+    updatedTime   timestamp null default null,
+   primary key( twokey_comp, twokey_sqno )
+);
+```
 
+```JSON
+  "GET" : {
+    "validate" : [ 
+          { "pkey1" : [  "int", "min" , 1, "max" , 1000 ] },
+          { "pkey2" : [  "int", "min" , 1, "max" , 1000 ] }
+            ],
+    "sql" : "select * from twokey where  twokey_comp = ?pkey1 and twokey_sqno = ?pkey2 "
+  },
+
+```
+
+    http://localhost:8080/restday/v1/twokey/111/222
+    
+    
+- pkey1 = 111, pkey2 = 222 としてSQLを実行し、結果をJSONで返します。
+- Execute SQL with pkey1 = 111, pkey2 = 222 and return the result as JSON.
+
+
+---
+
+## GETに条件を指定して、結果を絞ることも、多少可能です。
+## It is somewhat possible to narrow down the results by specifying conditions for GET.
+
+- No4
+
+```JSON
+  "GET" : {
+    "validate" : [
+            ],
+    "where" : [ 
+          { "from" : [  "Date" ] },
+          { "to" :   [  "Date" ] }
+            ],
+    "sql" : "select * from user_t {w ?from <= first_visit  && first_visit <= ?to}"
+  }
+```
+
+- {w から } に囲んだ部分は、パラメータに指定がある時に限りSQLに展開されます
+- The part between {w and} is expanded to SQL only when specified in the parameter
+
+
+    http://localhost:8080/restday/v1/users/?from=2019-06-01
+
+- 上の例の場合、以下のSQLが実行されます。
+-  In the above example, the following SQL is executed.
+
+```SQL
+select * from user_t where '2019-06-01' <= first_visit 
+```
+
+---
+
+    http://localhost:8080/restday/v1/users/?to=2020-04-01
+
+- 上の例の場合、以下のSQLが実行されます。
+-  In the above example, the following SQL is executed.
+
+```SQL
+select * from user_t where  first_visit <= '2020-04-01'
+```
+
+---
+
+    http://localhost:8080/restday/v1/users/?from=2019-06-01&to=2020-04-01
+
+- 上の例の場合、以下のSQLが実行されます。
+-  In the above example, the following SQL is executed.
+
+```SQL
+select * from user_t where  '2019-06-01' <= first_visit  && first_visit <= '2020-04-01'
+```
+
+---
+
+- 今の所、and 条件でつなぐ事しかできません
+- For now, you can only connect with and conditions
+
+- 簡単なSQL構文でないと、上手く展開されません
+- If it is not simple SQL syntax, it will not expand well
 
 
 ## Requirement
