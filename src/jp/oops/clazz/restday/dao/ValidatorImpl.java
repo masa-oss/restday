@@ -224,6 +224,17 @@ public class ValidatorImpl implements IValidator {
             }
             sv = SQLValue.createDouble(d);
 
+        } else if ("bool".equals(jsType)) {
+            boolean b;
+            try {
+                b = Boolean.parseBoolean(inputValue);
+            } catch (Exception ex1) {
+                sv = SQLValue.createNull();
+                sv.setErrorMsg(ErrorMsg.build(E904, key, inputValue));
+                return sv;
+            }
+            sv = SQLValue.createBool(b);
+
         } else {
             throw new ConfigurationSyntaxErrorException("unknown keyword '" + jsType + "'");
         }
