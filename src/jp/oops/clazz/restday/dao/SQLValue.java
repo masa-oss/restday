@@ -21,6 +21,7 @@ public final class SQLValue {
     public static final int DOUBLE = 3;
     public static final int LONG = 4;
     public static final int BIGDECIMAL = 5;
+    public static final int BOOL = 6;
     public static final int DATE = 9;
     public static final int TIMESTAMP = 10;
             
@@ -39,6 +40,8 @@ public final class SQLValue {
     private String valueString;
 
     private BigDecimal bigDecimal;
+
+    private boolean valueBool;
 
     private java.sql.Date date;
     
@@ -123,6 +126,9 @@ public final class SQLValue {
                 case 5:
                     sb.append(bigDecimal);
                     break;
+                case 6:
+                    sb.append(valueBool);
+                    break;
                 case 9:
                     sb.append(date);
                     break;
@@ -177,6 +183,13 @@ public final class SQLValue {
         SQLValue inst = new SQLValue();
         inst.bigDecimal = value;
         inst.valueType = 5;
+        return inst;
+    }
+
+    public static SQLValue createBool(boolean value) {
+        SQLValue inst = new SQLValue();
+        inst.valueBool = value;
+        inst.valueType = BOOL;
         return inst;
     }
     
